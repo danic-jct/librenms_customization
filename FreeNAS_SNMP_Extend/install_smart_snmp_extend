@@ -6,6 +6,10 @@
 fetch https://raw.githubusercontent.com/danic-jct/librenms_customization/master/FreeNAS_SNMP_Extend/freenas_smart -o /var/db/system/smart
 fetch https://raw.githubusercontent.com/danic-jct/librenms_customization/master/FreeNAS_SNMP_Extend/disklist.py -o /var/db/system/disklist.py
 
+#Mark as exec
+chmod +x /var/db/system/smart
+chmod +x /var/db/system/disklist.py
+
 #Create and set config file
 touch /var/db/system/smart.config
 echo cache=/var/cache/smart >> /var/db/system/smart.config
