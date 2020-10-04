@@ -12,7 +12,7 @@ chmod +x /var/db/system/disklist.py
 
 #Create and set config file
 touch /var/db/system/smart.config
-echo cache=/var/cache/smart >> /var/db/system/smart.config
+echo cache=/var/cache/smart > /var/db/system/smart.config
 echo smartctl=/usr/local/sbin/smartctl >> /var/db/system/smart.config
 echo useSN=0 >> /var/db/system/smart.config
 /var/db/system/disklist.pl -c:d | sed '1,2d' | sed '$d' | sed '$d' >> /var/db/system/smart.config
