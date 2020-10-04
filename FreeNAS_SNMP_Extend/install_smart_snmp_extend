@@ -15,7 +15,7 @@ touch /var/db/system/smart.config
 echo cache=/var/cache/smart > /var/db/system/smart.config
 echo smartctl=/usr/local/sbin/smartctl >> /var/db/system/smart.config
 echo useSN=0 >> /var/db/system/smart.config
-/var/db/system/disklist.pl -c:d | sed '1,2d' | sed '$d' | sed '$d' >> /var/db/system/smart.config
+/var/db/system/disklist.py -c:d | sed '1,2d' | sed '$d' | sed '$d' >> /var/db/system/smart.config
 
 #Update freenas service configuration for SNMP
 sqlite3 /data/freenas-v1.db 'UPDATE services_snmp set snmp_options = snmp_options || char(10) || "extend smart /var/db/system/smart -c /var/db/system/smart.config";'
