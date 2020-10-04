@@ -3,8 +3,8 @@
 #Tested on FreeNAS 11.3 
 
 #Grab nesscary scripts
-fetch freenas_smart -o /var/db/system/smart
-fetch disklist.py -o /var/db/system/disklist.py
+fetch https://raw.githubusercontent.com/danic-jct/librenms_customization/master/freenas_smart -o /var/db/system/smart
+fetch https://raw.githubusercontent.com/danic-jct/librenms_customization/master/disklist.py -o /var/db/system/disklist.py
 
 #Create and set config file
 touch /var/db/system/smart.config
