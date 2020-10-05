@@ -20,6 +20,7 @@ echo useSN=1 >> /var/db/system/smart.config
 #Update freenas service configuration for SNMP
 if [[ ! $(sqlite3 /data/freenas-v1.db 'select snmp_options from services_snmp where snmp_options like "%extend smart /var/db/system/smart -c /var/db/system/smart.config%";') ]]; then
 sqlite3 /data/freenas-v1.db 'UPDATE services_snmp set snmp_options = snmp_options || char(10) || "extend smart /var/db/system/smart -c /var/db/system/smart.config";'
+sqlite3 /data/freenas-v1.db 'UPDATE services_snmp set snmp_zilstat = 1;'
 fi
 
 
