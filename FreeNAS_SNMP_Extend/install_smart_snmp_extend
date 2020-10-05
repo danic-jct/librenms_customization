@@ -18,8 +18,12 @@ echo useSN=0 >> /var/db/system/smart.config
 /var/db/system/disklist.py -c:d | sed '1,2d' | sed '$d' | sed '$d' >> /var/db/system/smart.config
 
 #Update freenas service configuration for SNMP
+if [[ ! $(sqlite3 /data/freenas-v1.db 'select snmp_options from services_snmp where snmp_options like "%extend smart /var/db/system/smart -c /var/db/system/smart.config%";') ]]; then
 sqlite3 /data/freenas-v1.db 'UPDATE services_snmp set snmp_options = snmp_options || char(10) || "extend smart /var/db/system/smart -c /var/db/system/smart.config";'
+fi
+
 
 #Update FreeNAS Cron job
+if [[ ! $(sqlite3 /data/freenas-v1.db 'select cron_description from tasks_cronjob where cron_description like "%SNMP SMART UPDATE%";') ]]; then
 sqlite3 /data/freenas-v1.db 'INSERT INTO tasks_cronjob (cron_minute,cron_hour,cron_daymonth,cron_month,cron_dayweek,cron_user,cron_command,cron_description,cron_enabled,cron_stdout,cron_stderr) VALUES ("*/5","*","*","*","*","root","/var/db/system/smart -u","SNMP SMART UPDATE",1,1,1);'
-
+fi
