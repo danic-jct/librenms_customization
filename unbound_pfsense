@@ -1,0 +1,5 @@
+#!/bin/sh
+
+unbountctl='/usr/bin/env unbound-control'
+
+$unbountctl -c /var/unbound/unbound.conf stats
